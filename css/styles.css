@@ -1,0 +1,55 @@
+    .nav-link-admin {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: #008397;
+        text-decoration: none;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .nav-link-admin {
+            transition: none;
+        }
+    }
+
+    .nav-link-admin:hover, .nav-link-admin:focus {
+        color: #008397;
+    }
+
+    .nav-pills-admin .nav-link-admin {
+        background: none;
+        border: 0;
+        border-radius: 0.25rem;
+    }
+
+    .nav-pills-admin .nav-link-admin.active,
+    .nav-pills-admin .show > .nav-link-admin {
+        color: rgb(0, 0, 0);
+        background-color: #008397;
+    }
+
+    .text-nav {
+        padding-top: 0.3125rem;
+        padding-bottom: 0.3125rem;
+        margin-right: 1rem;
+        font-size: 1.25rem;
+        text-decoration: none;
+        white-space: nowrap;
+        color: #008397;
+    }
+    
+    .text-nav:hover, .text-nav:hover:focus {
+        color: #008397;
+    }
+
+    .text-blue{   
+        color: #008397;
+    }
+
+    .bg-principal{   
+        background-color: #592321;
+    }
+    
+    .text-green{   
+        color: #146631;
+    }
