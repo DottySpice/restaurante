@@ -30,6 +30,7 @@
                     foreach($resultado as $categoria):
                 ?>
 
+                <!-- Div que muestra las categorias para filtrar -->
                 <div class="col text-center">
                     <a class="text-green" role="button" href="menu.php?id_categoria=<?php echo $categoria["id_categoria"]; ?>"> <?php echo $categoria["categoria"] ?> </a> 
                 </div>

@@ -6,40 +6,28 @@
         //Funciones asimilando los CRUD
 
         public function read(){
-            $consulta = $this -> db -> prepare("SELECT id_categoria, categoria, id_plato, descripcion, plato, foto, precio FROM plato 
-            left join categoria USING (id_categoria) 
-            ORDER by plato ASC");    
-            $consulta -> execute();
-            $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
-            return $resultado;
-        }
-
-        //Funcion que filtra mediante categoria
-        public function filtroCategoria($id_categoria){
-            $consulta = $this -> db -> prepare("SELECT * FROM plato WHERE id_categoria=:id_categoria");    
-            $consulta->bindParam(':id_categoria', $id_categoria, PDO::PARAM_INT);
+            $consulta = $this -> db -> prepare("SELECT id_categoria, categoria, id_plato, p.plato, p.precio, p.descripcion, p.foto FROM plato p 
+            left join categoria USING (id_categoria)  
+            ORDER by p.plato ASC");    
 
             $consulta -> execute();
             $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
             return $resultado;
         }
         
-        /*
         public function create($data){
             $resultado = null;
-            $foto = $this -> cargarImagen("helado");
+            $foto = $this -> cargarImagen("plato");
 
             if ($foto) {
+                $consulta = $this -> db -> prepare("INSERT INTO plato(plato, descripcion, foto ,precio, id_categoria) 
+                VALUES (:plato, :descripcion, :foto, :precio, :id_categoria)");
 
-                $consulta = $this -> db -> prepare("INSERT INTO helado(helado,descripcion,foto,precio,id_sabor,id_marca) 
-                values (:helado,:descripcion,:foto,:precio,:id_sabor,:id_marca)");
-
-                $consulta -> bindParam(':helado', $data['helado'], PDO::PARAM_STR);;
+                $consulta -> bindParam(':plato', $data['plato'], PDO::PARAM_STR);
                 $consulta -> bindParam(':descripcion', $data['descripcion'], PDO::PARAM_STR);
-                $consulta -> bindParam(':precio', $data['precio'], PDO::PARAM_INT);
-                $consulta -> bindParam(':id_sabor', $data['id_sabor'], PDO::PARAM_STR);
-                $consulta -> bindParam(':id_marca', $data['id_marca'], PDO::PARAM_STR);
                 $consulta -> bindParam(':foto', $foto, PDO::PARAM_STR);
+                $consulta -> bindParam(':precio', $data['precio'], PDO::PARAM_INT);
+                $consulta -> bindParam(':id_categoria', $data['id_categoria'], PDO::PARAM_STR);
 
                 $consulta -> execute();
                 $resultado = $consulta -> rowCount();
@@ -49,8 +37,8 @@
 
         public function delete($id){
 
-            $consulta = $this -> db -> prepare("DELETE from helado WHERE id_helado=:id_helado");
-            $consulta -> bindParam(':id_helado', $id, PDO::PARAM_INT);
+            $consulta = $this -> db -> prepare("DELETE from plato WHERE id_plato=:id_plato");
+            $consulta -> bindParam(':id_plato', $id, PDO::PARAM_INT);
             
             $consulta -> execute();
             $resultado = $consulta -> rowCount();
@@ -59,25 +47,24 @@
 
         public function update($id,$data){
 
-            $foto = $this -> cargarImagen("helado");
+            $foto = $this -> cargarImagen("plato");
 
             if ($foto) {
-                $consulta = $this -> db -> prepare("UPDATE helado 
-                SET helado=:helado,descripcion=:descripcion,precio=:precio,id_sabor=:id_sabor,id_marca=:id_marca,foto=:foto
-                WHERE id_helado=:id_helado");
+                $consulta = $this -> db -> prepare("UPDATE plato 
+                SET plato=:plato,descripcion=:descripcion,precio=:precio,id_categoria=:id_categoria,foto=:foto
+                WHERE id_plato=:id_plato");
             }
             else {
-                $consulta = $this -> db -> prepare("UPDATE helado 
-                SET helado=:helado,descripcion=:descripcion,precio=:precio,id_sabor=:id_sabor,id_marca=:id_marca
-                WHERE id_helado=:id_helado");
+                $consulta = $this -> db -> prepare("UPDATE plato 
+                SET plato=:plato,descripcion=:descripcion,precio=:precio,id_categoria=:id_categoria
+                WHERE id_plato=:id_plato");
             }
-
-            $consulta -> bindParam(':helado', $data['helado'], PDO::PARAM_STR);
+        
+            $consulta -> bindParam(':plato', $data['plato'], PDO::PARAM_STR);
             $consulta -> bindParam(':descripcion', $data['descripcion'], PDO::PARAM_STR);
             $consulta -> bindParam(':precio', $data['precio'], PDO::PARAM_INT);
-            $consulta -> bindParam(':id_sabor', $data['id_sabor'], PDO::PARAM_INT);
-            $consulta -> bindParam(':id_marca', $data['id_marca'], PDO::PARAM_INT);
-            $consulta -> bindParam(':id_helado', $id, PDO::PARAM_INT);
+            $consulta -> bindParam(':id_categoria', $data['id_categoria'], PDO::PARAM_INT);
+            $consulta -> bindParam(':id_plato', $id, PDO::PARAM_INT);
 
             if ($foto) {
                 $consulta -> bindParam(':foto', $foto, PDO::PARAM_STR);
@@ -88,16 +75,26 @@
             return $resultado;
         }
 
+        public function filtroCategoria($id_categoria) {
+            $consulta = $this -> db -> prepare("SELECT id_categoria, categoria, id_plato, p.plato, p.precio, p.descripcion, p.foto FROM plato p 
+            left join categoria USING (id_categoria) 
+            WHERE id_categoria=:id_categoria 
+            ORDER by p.plato ASC");
+            $consulta -> bindParam(":id_categoria", $id_categoria, PDO::PARAM_INT);
+
+            $consulta -> execute();
+            return $consulta -> fetchAll(PDO::FETCH_ASSOC);
+        }
+
         public function readOne($id){
 
-            $consulta = $this -> db -> prepare("SELECT * FROM helado WHERE id_helado=:id_helado");    
-            $consulta->bindParam(':id_helado', $id, PDO::PARAM_INT);
+            $consulta = $this -> db -> prepare("SELECT * FROM categoria WHERE id_categoria=:id_categoria");    
+            $consulta->bindParam(':id_categoria', $id, PDO::PARAM_INT);
 
             $consulta -> execute();
             $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
             return $resultado;
         }
-        */
     }
 
     //Se crea el objeto de la clase y se llama a la conexion
