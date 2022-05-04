@@ -1,3 +1,8 @@
+<?php 
+    require_once("../class/conexion.class.php"); 
+    $conexion -> validarRol(1);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +26,7 @@
         <hr>
         <div class="row text-center text-blue">
             <h1>Bienvenido</h1>
-            <h3>Nombre del admistrador</h3>
+            <h3><?php echo $_SESSION["correo"]; ?></h3>
         </div>
         <hr>
         <div class="row text-center">

@@ -3,8 +3,9 @@
     require_once("../class/platos.class.php");
     require_once("../class/categorias.class.php");
     include ("view/nav-admin.php");
-    
 
+    $plato -> validarRol(1);
+    
     //Existe accion?
     $accion = isset($_GET['accion'])?$_GET['accion']:null;
 

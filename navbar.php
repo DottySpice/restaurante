@@ -1,6 +1,7 @@
 <?php 
     include "functions-header.php";
 ?>
+
 <div class="row">
     <nav class="navbar navbar-expand navbar-light" style="background-color: #592321 ;">
         <div class="container-fluid ">
@@ -29,9 +30,9 @@
             </div>
 
             <div class="">
-                <ul class="nav justify-content-end text-center">
+                <ul class="nav nav-pills-admin justify-content-end text-center">
                     <li class="nav-item">
-                        <a class="nav-link-admin <?=imprimirActivo("iniciar-sesion")?>" href="iniciar-sesion.php"><div><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></div>Iniciar sesion</a>
+                        <a class="nav-link-admin <?=imprimirActivo("iniciar-sesion-form")?>" href="iniciar-sesion-form.php"><div><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></div>Iniciar sesion</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link-admin <?=imprimirActivo("carro")?>" href="carro.php"><div><i class="fa-solid fa-cart-shopping fa-lg"></i></div>Carro</a>

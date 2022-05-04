@@ -2,6 +2,8 @@
     //Se llama la clase
     require_once("../class/categorias.class.php");
     include ("view/nav-admin.php");
+
+    $categoria -> validarRol(1);
     
 
     //Existe accion?

@@ -38,8 +38,6 @@
             return $resultado;
         }  
 
-
-        
         public function update($id,$data){
 
             $consulta = $this -> db -> prepare("UPDATE categoria 

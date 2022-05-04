@@ -42,7 +42,7 @@
                             <a class="nav-link-admin <?=imprimirActivo("perfil")?>" href="perfil.php"><div><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></div>Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link-admin <?=imprimirActivo("cerrar-sesion")?>" href="cerrar-sesion.php"><div><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></div>Cerrar Sesion</a>
+                            <a class="nav-link-admin <?=imprimirActivo("cerrar-sesion")?>" href="../iniciar-sesion.php?accion=logout"><div><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></div>Cerrar Sesion</a>
                         </li>
 
                     </ul>
