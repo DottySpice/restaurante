@@ -31,7 +31,13 @@
                             <a class="nav-link-admin <?=imprimirActivo("categoria")?>" href="categoria.php"><div><i class="fa-solid fa-utensils fa-lg"></i></div>Categorias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link-admin <?=imprimirActivo("plato")?>" href="plato.php"><div><i class="fa-solid fa-people-group fa-lg"></i></div>Platos</a>
+                            <a class="nav-link-admin <?=imprimirActivo("plato")?>" href="plato.php"><div><i class="fa-solid fa-plate-wheat"></i></div>Platos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link-admin <?=imprimirActivo("rol")?>" href="rol.php"><div><i class="fa-solid fa-ruler"></i></div>Roles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link-admin <?=imprimirActivo("usuario")?>" href="usuario.php"><div><i class="fa-solid fa-users"></i></div>Usuarios</a>
                         </li>
                     </ul>
                 </div>

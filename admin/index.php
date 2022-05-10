@@ -1,6 +1,6 @@
 <?php 
     require_once("../class/conexion.class.php"); 
-    $conexion -> validarRol(1);
+    $conexion -> validarRol(2);
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
         <hr>
         <div class="row text-center text-blue">
             <h1>Bienvenido</h1>
-            <h3><?php echo $_SESSION["correo"]; ?></h3>
+            <h3><?php echo $_SESSION["nombre"]; ?></h3>
         </div>
         <hr>
         <div class="row text-center">

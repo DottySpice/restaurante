@@ -12,9 +12,11 @@
                 $resultado = $usuario -> registrar($data);
 
                 if (!$resultado) {
+                    //Caso para correo ya registrado
                     header("Location: registrate-form.php?m=100");
                 }
                 else {
+                    //Caso para usuario creado exitosamente
                     header("Location: registrate-form.php?m=200");
                 }
             }

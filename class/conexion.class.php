@@ -26,7 +26,8 @@ class Conexion{
         $contrasena = md5($contrasena);
         if ($this -> validarCorreo($correo)) {
         
-            $consulta = $this -> db -> prepare("SELECT * FROM usuario 
+            $consulta = $this -> db -> prepare("SELECT * FROM usuario LEFT JOIN persona 
+            USING (id_persona) 
             WHERE correo=:correo AND contrasena=:contrasena");  
 
             $consulta -> bindParam(':correo', $correo, PDO::PARAM_STR);
@@ -36,9 +37,15 @@ class Conexion{
             $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
 
             if (isset($resultado["correo"])) {
+
                 $_SESSION["validado"] =  true;
                 $_SESSION["correo"] =  $correo;
+                $_SESSION["nombre"] =  $resultado["nombre"];
+                $_SESSION["direccion"] =  $resultado["direccion"];
+                $_SESSION["codigo_postal"] =  $resultado["codigo_postal"];
+                $_SESSION["sexo"] =  $resultado["sexo"];
                 $_SESSION["id_rol"] = $resultado["id_rol"];
+                $_SESSION["id_persona"] = $resultado["id_persona"];
                 return true;
             }
         }
@@ -51,6 +58,11 @@ class Conexion{
         if (isset($_SESSION["validado"])) {unset ($_SESSION["validado"]);}
         if (isset($_SESSION["correo"])) {unset ($_SESSION["correo"]);}
         if (isset($_SESSION["id_rol"])) {unset ($_SESSION["id_rol"]);}
+        if (isset($_SESSION["id_persona"])) {unset ($_SESSION["id_persona"]);}
+        if (isset($_SESSION["sexo"])) {unset ($_SESSION["sexo"]);}
+        if (isset($_SESSION["codigo_postal"])) {unset ($_SESSION["codigo_postal"]);}
+        if (isset($_SESSION["direccion"])) {unset ($_SESSION["direccion"]);}
+        if (isset($_SESSION["nombre"])) {unset ($_SESSION["nombre"]);}
         session_destroy();
     }
 

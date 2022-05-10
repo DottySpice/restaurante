@@ -14,7 +14,7 @@
                     //Se inicia sesion con correo y contrasena
                     if ($conexion -> login($correo, $contrasena)) {
                         //Comprobar que tipo de usuario es mediante su rol
-                        if ($_SESSION["id_rol"] == 1) {
+                        if ($_SESSION["id_rol"] == 2) {
                             header("Location: admin/index.php");
                         }
                         else{

@@ -5,9 +5,14 @@
     class Usuarios extends Conexion{
         //Funciones asimilando los CRUD
 
+        //Funcion para leer a los usuarios
         public function read(){
-            $consulta = $this -> db -> prepare("SELECT * FROM categoria 
-            ORDER by categoria ASC");   
+            $consulta = $this -> db -> prepare("SELECT * FROM usuario 
+            LEFT JOIN persona 
+            USING (id_persona) 
+            LEFT JOIN rol
+            USING (id_rol)
+            ORDER BY nombre");   
              
             $consulta -> execute();
             $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
@@ -16,7 +21,6 @@
         
         //Funcion para registrar un nuevo usuario
         public function registrar($data){
-            $resultado = null;
             
             //Se va a buscar si el correo esta registrado o no
             $consulta = $this -> db -> prepare("SELECT * FROM usuario
@@ -46,7 +50,7 @@
 
                 //Se registran los datos de la cuenta con la relacion del id_persona
                 //El rol se inicia en 2, debe se modificado en admin para otorgar perimsos de admin
-                $id_rol = 2;
+                $id_rol = 1;
                 //Se codifica el formato de la contrasena
                 $contrasena = md5($data["contrasena"]);
 
@@ -63,31 +67,54 @@
             }
         }
 
-        public function delete($id){
-
-            $consulta = $this -> db -> prepare("DELETE from categoria WHERE id_categoria=:id_categoria");
-            $consulta -> bindParam(':id_categoria', $id, PDO::PARAM_INT);
+        public function delete($id, $id_persona){
             
+            //Se borra a la persona asociada
+            $consulta = $this -> db -> prepare("DELETE from persona WHERE id_persona=:id_persona");
+            $consulta -> bindParam(':id_persona', $id_persona, PDO::PARAM_INT);
             $consulta -> execute();
-            $resultado = $consulta -> rowCount();
+
+            //Se borra al usuario
+            $consulta2 = $this -> db -> prepare("DELETE from usuario WHERE id_usuario=:id_usuario");
+            $consulta2 -> bindParam(':id_usuario', $id, PDO::PARAM_INT);
+            $consulta2 -> execute();
+
+            $resultado = $consulta2 -> rowCount();
             return $resultado;
-        }  
-
-        public function update($id,$data){
-
-            $consulta = $this -> db -> prepare("UPDATE categoria 
-            SET categoria=:categoria
-            WHERE id_categoria=:id_categoria");
+        } 
         
 
-            $consulta -> bindParam(':categoria', $data['categoria'], PDO::PARAM_STR);
-            $consulta -> bindParam(':id_categoria', $id, PDO::PARAM_INT);
+        //Funcion para actulizar a un usuario
+        public function update($id,$id_persona,$data){
 
+            //Se actualiza la tabla usuario en primer lugar
+            
+            $consulta = $this -> db -> prepare("UPDATE usuario 
+            SET id_rol=:id_rol
+            WHERE id_usuario=:id_usuario");
+
+            $consulta -> bindParam(':id_usuario', $id, PDO::PARAM_INT);
+            $consulta -> bindParam(':id_rol', $data['id_rol'], PDO::PARAM_INT);
             $consulta -> execute();
+        
+
+            //Se actualiza la tabla persona asociada al id_Persona
+            $consulta = $this -> db -> prepare("UPDATE persona 
+            SET nombre=:nombre,direccion=:direccion,codigo_postal=:codigo_postal,sexo=:sexo
+            WHERE id_persona=:id_persona");
+
+            $consulta -> bindParam(':id_persona', $id_persona, PDO::PARAM_INT);
+            $consulta -> bindParam(':nombre', $data["nombre"], PDO::PARAM_STR);
+            $consulta -> bindParam(':direccion', $data["direccion"], PDO::PARAM_STR);
+            $consulta -> bindParam(':codigo_postal', $data["codigo_postal"], PDO::PARAM_INT);
+            $consulta -> bindParam(':sexo', $data["sexo"], PDO::PARAM_STR);
+            $consulta -> execute();
+
             $resultado = $consulta -> rowCount();
             return $resultado;
         }
 
+        /*
         public function readOne($id){
 
             $consulta = $this -> db -> prepare("SELECT * FROM categoria WHERE id_categoria=:id_categoria");    
@@ -96,7 +123,7 @@
             $consulta -> execute();
             $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
             return $resultado;
-        }
+        } */
     }
 
     //Se crea el objeto de la clase y se llama a la conexion
