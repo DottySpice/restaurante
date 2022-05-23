@@ -10,7 +10,7 @@
     <link href="../css/bootstrap.css" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3beda8c82a.js" crossorigin="anonymous"></script>
-    <title><?php imprimirTitulo(); ?> - Administracion</title>
+    <title><?php imprimirTitulo(); ?> - Cliente</title>
 </head>
 <body>
     <div class="row">
@@ -18,7 +18,7 @@
             <div class="container-fluid ">
                 <a class="text-nav" href="index.php">
                     <img src="../images/logo.jpg" alt="" width="40" height="40" class="d-inline-block align-text-top">
-                    Restaurante - Administracion
+                    Restaurante - Cliente
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -29,16 +29,15 @@
                             <a class="nav-link-admin <?=imprimirActivo("index")?>" href="index.php"><div><i class="fa-solid fa-house fa-lg"></i></div>Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link-admin <?=imprimirActivo("categoria")?>" href="categoria.php"><div><i class="fa-solid fa-utensils fa-lg"></i></div>Categorias</a>
+                            <a class="nav-link-admin <?=imprimirActivo("menu")?>" href="menu.php"><div><i class="fa-solid fa-utensils fa-lg"></i></div>Menu</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link-admin <?=imprimirActivo("plato")?>" href="plato.php"><div><i class="fa-solid fa-plate-wheat"></i></div>Platos</a>
+                            <a class="nav-link-admin <?=imprimirActivo("pedido")?>" href="pedido.php"><div><i class="fa-solid fa-truck"></i></div>Pedidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link-admin <?=imprimirActivo("rol")?>" href="rol.php"><div><i class="fa-solid fa-ruler"></i></div>Roles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link-admin <?=imprimirActivo("usuario")?>" href="usuario.php"><div><i class="fa-solid fa-users"></i></div>Usuarios</a>
+                            <?php include ("carro-nav.php"); ?>
+                            <a class="nav-link-admin" data-bs-toggle="modal" data-bs-target="#infoCarro"><div><i class="fa-solid fa-cart-shopping"></i></div><span class="badge bg-black"><?php echo $cantidad_total ?></span></a>
+                            <?php include ("../modals/modal-info-carro.php"); ?>
                         </li>
                     </ul>
                 </div>
@@ -63,7 +62,6 @@
                         <li class="nav-item">
                             <a class="nav-link-admin <?=imprimirActivo("cerrar-sesion")?>" href="../iniciar-sesion.php?accion=logout"><div><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></div>Cerrar Sesion</a>
                         </li>
-
                     </ul>
                 </div>
             </div>

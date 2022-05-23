@@ -1,6 +1,6 @@
 <?php 
     require_once("../class/conexion.class.php"); 
-    $conexion -> validarRol(2);
+    $conexion -> validarRol(1);
 ?>
 
 <!DOCTYPE html>
@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="https://kit.fontawesome.com/3beda8c82a.js" crossorigin="anonymous"></script>
-    <title>Bienvenido Administrador</title>
+    <title>Bienvenido - Restaurante By E. Villegas Planner</title>
 </head>
 <body>
-    <?php include ("view/nav-admin.php") ?>
+    <?php include ("view/nav-cliente.php") ?>
 
     <div class=" container p-3">
         <div class="row text-center">
@@ -35,16 +35,16 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <a href="categoria.php"><button class=" btn btn-info btn-lg">Categorias</button></a>
+                    <a href="categoria.php"><button class=" btn btn-info btn-lg">Inicio</button></a>
                 </div>
                 <div class="col">
-                    <a href="plato.php"><button  class=" btn btn-info btn-lg">Platos</button></a>
+                    <a href="plato.php"><button  class=" btn btn-info btn-lg">Menu</button></a>
                 </div>  
                 <div class="col">
-                    <a href="rol.php"><button class=" btn btn-info btn-lg">Roles</button></a>
+                    <a href="rol.php"><button class=" btn btn-info btn-lg">Contacto</button></a>
                 </div>
                 <div class="col">
-                    <a href="usuario.php"><button class=" btn btn-info btn-lg">Usuarios</button></a>
+                    <a href="usuario.php"><button class=" btn btn-info btn-lg">Acerca de nosotros</button></a>
                 </div>
 
             </div>

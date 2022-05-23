@@ -66,8 +66,8 @@
                             <hr>
                             <div class="text-center">
                                 <!-- Boton para abrir ventana modal -->
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#platoInfo<?php echo $plato['id_plato']; ?>"><i class="fa-solid fa-circle-info"></i> Ver mas informacion</button>
-                                <?php include ("modals/modal-plato-info-menu.php") ?> 
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalInfo<?php echo $plato['id_plato']; ?>"><i class="fa-solid fa-cart-plus"></i> Agregar el carrito</button>
+                                <?php include ("modals/modal-plato.php") ?> 
                             </div>
                         </div>
                     </div>

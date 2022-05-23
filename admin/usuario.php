@@ -6,7 +6,6 @@
 
     $usuario -> validarRol(2);
     
-
     //Existe accion?
     $accion = isset($_GET['accion'])?$_GET['accion']:null;
 

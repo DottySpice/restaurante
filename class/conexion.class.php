@@ -46,6 +46,7 @@ class Conexion{
                 $_SESSION["sexo"] =  $resultado["sexo"];
                 $_SESSION["id_rol"] = $resultado["id_rol"];
                 $_SESSION["id_persona"] = $resultado["id_persona"];
+                $_SESSION["id_usuario"] = $resultado["id_usuario"];
                 return true;
             }
         }
@@ -58,11 +59,13 @@ class Conexion{
         if (isset($_SESSION["validado"])) {unset ($_SESSION["validado"]);}
         if (isset($_SESSION["correo"])) {unset ($_SESSION["correo"]);}
         if (isset($_SESSION["id_rol"])) {unset ($_SESSION["id_rol"]);}
+        if (isset($_SESSION["id_usuario"])) {unset ($_SESSION["id_usuario"]);}
         if (isset($_SESSION["id_persona"])) {unset ($_SESSION["id_persona"]);}
         if (isset($_SESSION["sexo"])) {unset ($_SESSION["sexo"]);}
         if (isset($_SESSION["codigo_postal"])) {unset ($_SESSION["codigo_postal"]);}
         if (isset($_SESSION["direccion"])) {unset ($_SESSION["direccion"]);}
         if (isset($_SESSION["nombre"])) {unset ($_SESSION["nombre"]);}
+        if (isset($_SESSION["carrito"])) {unset ($_SESSION["carrito"]);}
         session_destroy();
     }
 

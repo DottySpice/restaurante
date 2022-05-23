@@ -18,8 +18,7 @@
                             header("Location: admin/index.php");
                         }
                         else{
-                            echo $_SESSION["id_rol"];
-                            echo'Eres un cliente';
+                            header("Location: cliente/index.php");
                         }
                     }
                     else {

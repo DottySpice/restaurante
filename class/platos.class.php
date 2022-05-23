@@ -88,8 +88,8 @@
 
         public function readOne($id){
 
-            $consulta = $this -> db -> prepare("SELECT * FROM categoria WHERE id_categoria=:id_categoria");    
-            $consulta->bindParam(':id_categoria', $id, PDO::PARAM_INT);
+            $consulta = $this -> db -> prepare("SELECT * FROM plato WHERE id_plato=:id_plato");    
+            $consulta->bindParam(':id_plato', $id, PDO::PARAM_INT);
 
             $consulta -> execute();
             $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);

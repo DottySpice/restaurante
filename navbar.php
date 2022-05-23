@@ -34,9 +34,6 @@
                     <li class="nav-item">
                         <a class="nav-link-admin <?=imprimirActivo("iniciar-sesion-form")?>" href="iniciar-sesion-form.php"><div><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></div>Iniciar sesion</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link-admin <?=imprimirActivo("carro")?>" href="carro.php"><div><i class="fa-solid fa-cart-shopping fa-lg"></i></div>Carro</a>
-                    </li>
                 </ul>
             </div>
         </div>
