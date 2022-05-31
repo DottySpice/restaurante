@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://kit.fontawesome.com/3beda8c82a.js" crossorigin="anonymous"></script>
-    <title>Iniciar Sesion - Restaurante By E. Villegas Planner</title>
+    <title>Olvido Contrasena - Restaurante By E. Villegas Planner</title>
 </head>
 <body>
     <div class=" container-fluid">
@@ -19,7 +19,7 @@
             <div class="col"></div>
             <div class="col border border-4 m-3 p-4">
                 <div class="row">
-                    <h1>Iniciar Sesion</h1>
+                    <h1>Recuperar Contrasena</h1>
                 </div>
                 <div class="row text-center">
                     <div>
@@ -28,41 +28,27 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <form method="POST" action="iniciar-sesion.php?accion=login">
+                    <form method="POST" action="iniciar-sesion.php?accion=olvido">
                         <div class="text-green"> 
+                            <div class="p-2 form-text text-danger">Ingresa tu correo asociado</div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text text-green" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
                                 <input type="email" name="correo" class="form-control" placeholder="Correo">
-                            </div> 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text text-green" id="basic-addon1"><i class="fa-solid fa-key"></i></span>
-                                <input type="password" name="contrasena" class="form-control" placeholder="Contrasena">
                             </div>          
                         </div>
                         <?php  
                             //Para imprimir error obteniendo el valor de m
                             if(isset ($_GET["m"])){
                                 switch($_GET['m']){
-                                    case 100: echo '<div class="alert alert-danger" role="alert">Correo o contrasena incorrecta</div>';
-                                    break;
-                                    case 300: echo '<div class="alert alert-danger" role="alert"> Incia sesion primero</div>';
-                                    break;
-                                    case 200: echo '<div class="alert alert-danger" role="alert"> No tienes acceso a esta pagina</div>';
-                                    break;
-                                    case 400: echo '<div class="alert alert-success" role="alert"> Contrasena actualizada con exito</div>';
-                                    break;
-                                    case 500: echo '<div class="alert alert-warning" role="alert"> Este token ha caducado</div>';
+                                    case 100: echo '<div class="alert alert-success" role="alert">Correo enviado, por favor revise si bandeja de entrada</div>';
                                     break;
                                 } 
                             }
-                        ?>   
-                        <button class="w-100 btn btn-primary" type="submit">Iniciar Sesion</button>
+                        ?> 
+                        <button class="w-100 btn btn-primary" type="submit">Recuperar</button>
                     </form>
                     <div class="form-text">
                         <a href="iniciar-sesion.php?accion=olvido">Olvidaste tu contrasena</a>
-                    </div>
-                    <div class="form-text">
-                        <a href="registrate-form.php">Registrate aqui!</a>
                     </div>
                 </div>
             </div>

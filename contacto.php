@@ -27,7 +27,7 @@
                         <i class="fa-solid fa-phone fa-2x"></i>
                     </div>
                     <div class="row  m-4">   
-                        <a>+524612976027</a> 
+                        <a href="https://wa.me/524612976027" target="_blank"> <h3>+52 461 297 6027</h3> </a>
                     </div>
                 </div>
 

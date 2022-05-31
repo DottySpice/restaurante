@@ -54,6 +54,100 @@ class Conexion{
         return false;
     }
 
+    public function recuperar($correo){
+        require '../vendor/autoload.php';
+
+        $consulta = $this -> db -> prepare("SELECT correo FROM usuario 
+        WHERE correo=:correo");  
+
+        $consulta -> bindParam(':correo', $correo, PDO::PARAM_STR);
+        $consulta -> execute();
+        $resultado= $consulta -> fetchAll(PDO::FETCH_ASSOC);
+
+        if($resultado[0]['correo']){
+            $token = substr(md5(md5($correo.random_int(1,100000).'golden'.md5(random_int(1,500))).soundex('uculele')),0,16);
+
+            $consulta = $this -> db -> prepare("UPDATE usuario SET token=:token WHERE correo=:correo");
+
+            $consulta -> bindParam(':correo', $correo, PDO::PARAM_STR);
+            $consulta -> bindParam(':token', $token, PDO::PARAM_STR);
+            $consulta -> execute();
+
+            $mensaje = "
+            <h2>Apreciable usuario presione el siguiente vilculo para reestablecer su contraseña.<h2><br>
+            <h2>Recupere su contrasena en el siguiente link<h2><br>
+            <a href=\"http://localhost/restaurante/iniciar-sesion.php?accion=restablecer&correo=$correo&token=$token\" target=\"_blank\">Recuperar contraseña</a>
+            <br><br>
+            Si usted no realizo esta acción por favor ignore este correo y contacte al administrador.";
+
+            $this -> send_correo($correo, "Recuperación de contraseña", $mensaje);
+
+            return true;
+        }
+        return false;
+    }
+
+    public function send_correo($destinatario,$asunto,$msj){
+        require '../vendor/autoload.php';
+
+        $mail = new PHPMailer\PHPMailer\PHPMailer;
+        $mail -> isSMTP();
+        $mail -> SMTPDebug = 0;
+        $mail -> Host = 'smtp.gmail.com';
+        $mail -> Port = 465;
+        $mail -> SMTPSecure = 'ssl';
+        $mail -> SMTPAuth = true;
+        $mail -> Username = '18031006@itcelaya.edu.mx';
+        $mail -> Password = '123Tamarindo';
+        $mail -> setFrom('18031006@itcelaya.edu.mx', 'Maximiliano');
+        $mail -> addAddress($destinatario, $destinatario);
+        $mail -> Subject = $asunto;
+        $mail -> msgHTML($msj);
+
+        if (!$mail -> send()) {
+            echo "Mailer Error: " . $mail -> ErrorInfo;
+            return false;
+        } 
+        else {
+            return true;
+        }
+    }
+
+
+    public function validarToken($correo,$token){
+        if($this->validarCorreo($correo) && strlen($token)==16){
+
+            $consulta = $this -> db -> prepare("SELECT * FROM usuario 
+            WHERE correo=:correo AND token=:token");
+
+            $consulta->bindParam(':correo', $correo, PDO::PARAM_STR);
+            $consulta->bindParam(':token', $token, PDO::PARAM_STR);
+            $consulta->execute();
+
+            $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
+
+            if (isset($resultado['correo'])){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public function nuevaContrasena($correo,$contrasena,$token){
+        $contrasena = md5($contrasena);
+
+        $consulta = $this -> db -> prepare("UPDATE usuario SET contrasena=:contrasena, token = NULL 
+        WHERE correo=:correo AND token=:token");
+
+        $consulta -> bindParam(':correo',$correo, PDO::PARAM_STR);
+        $consulta -> bindParam(':contrasena',$contrasena, PDO::PARAM_STR);
+        $consulta -> bindParam(':token',$token, PDO::PARAM_STR);
+        $resultado = $consulta->execute();
+        
+        return $resultado;
+    }
+
     //Para cerrar sesion y destruir la sesion actual
     public function logOut(){
         if (isset($_SESSION["validado"])) {unset ($_SESSION["validado"]);}

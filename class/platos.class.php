@@ -95,6 +95,44 @@
             $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
             return $resultado;
         }
+
+
+        public function create_postman($plato, $descripcion, $precio, $foto, $id_categoria){
+            $resultado = null;
+
+            $consulta = $this -> db -> prepare("INSERT INTO plato(plato, descripcion, precio, foto, id_categoria) 
+            values (:plato, :descripcion, :precio, :foto, :id_categoria)");
+
+            $consulta -> bindParam(':plato', $plato, PDO::PARAM_STR);
+            $consulta -> bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+            $consulta -> bindParam(':precio', $precio, PDO::PARAM_INT);
+            $consulta -> bindParam(':foto', $foto, PDO::PARAM_STR);
+            $consulta -> bindParam(':id_categoria', $id_categoria, PDO::PARAM_INT);
+
+            $consulta -> execute();
+            $resultado = $consulta -> rowCount();
+            
+            return $resultado;
+        }
+
+        public function update_postman($id, $plato, $descripcion, $precio, $foto, $id_categoria){
+
+            $consulta = $this -> db -> prepare("UPDATE plato 
+            SET plato=:plato, descripcion=:descripcion, precio=:precio, foto=:foto, id_categoria=:id_categoria 
+            WHERE id_plato=:id_plato");
+        
+
+            $consulta -> bindParam(':plato', $plato, PDO::PARAM_STR);
+            $consulta -> bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+            $consulta -> bindParam(':precio', $precio, PDO::PARAM_INT);
+            $consulta -> bindParam(':foto', $foto, PDO::PARAM_STR);
+            $consulta -> bindParam(':id_categoria', $id_categoria, PDO::PARAM_INT);
+            $consulta -> bindParam(':id_plato', $id, PDO::PARAM_INT);
+
+            $consulta -> execute();
+            $resultado = $consulta -> rowCount();
+            return $resultado;
+        }
     }
 
     //Se crea el objeto de la clase y se llama a la conexion

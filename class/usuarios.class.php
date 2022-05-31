@@ -31,6 +31,17 @@
             return $resultado;
         }
 
+        public function read_one_pedido($id_pedido_detalle){
+            $consulta = $this -> db -> prepare("SELECT * FROM pedido 
+            WHERE id_pedido_detalle=:id_pedido_detalle");     
+
+            $consulta->bindParam(':id_pedido_detalle', $id_pedido_detalle, PDO::PARAM_INT);
+             
+            $consulta -> execute();
+            $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
+            return $resultado;
+        }
+
         public function info_pedido($id_pedido_detalle){
             $consulta = $this -> db -> prepare("SELECT * FROM pedido_detalle 
             WHERE id_pedido_detalle=:id_pedido_detalle");     

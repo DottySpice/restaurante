@@ -1,9 +1,6 @@
 <?php 
-
     require_once("../class/categorias.class.php");
-
     switch ($_SERVER["REQUEST_METHOD"]) {
-
         case 'POST':
             //Para obtener los datos desde Postman
             $data = json_decode(file_get_contents('php://input'));
@@ -17,12 +14,12 @@
             }
             //Caso para insertar datos
             else {
+                
                 $categoria -> create_postman($data -> categoria);
 
                 echo "Se ha dado de alta una categoria";
             }
         break;
-
 
         case 'DELETE':
 
@@ -51,10 +48,5 @@
                 echo json_encode($datos);
             }
         break;
-        
     }
-
-
-
-
 ?>

@@ -16,6 +16,7 @@
                         <th scope="col">Direccion de entrega</th>
                         <th scope="col">Total</th>
                         <th scope="col">Informacion</th>
+                        <th scope="col">PDF</th>
                     </tr>
                 </thead>
 
@@ -33,6 +34,11 @@
                         <td><?php echo $pedido["total"];?>$</td>
                         <td>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pedidoInfo<?php echo $pedido["id_pedido_detalle"]; ?>"><i class="fa-solid fa-info"></i></button>
+                        </td>
+                        <td>
+                            <form class="p-1"  action="pedido.php?accion=pdf&<?php echo $pedido["id_pedido_detalle"]; ?>" method="POST">
+                                <input class="btn btn-success" type="submit" value="<?php echo "Generar PDF"; ?>" name="data[enviar]" />
+                            </form>
                         </td>
                     </tr>
                     <?php 
